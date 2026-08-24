@@ -47,16 +47,25 @@ export function renderCountdown(target: Date): HTMLElement {
     if (node.textContent !== value) node.textContent = value;
   };
 
-  function tick(): void {
-    const totalSec = Math.max(0, Math.floor((target.getTime() - Date.now()) / 1000));
+  const remaining = (): number =>
+    Math.max(0, Math.floor((target.getTime() - Date.now()) / 1000));
+
+  const paint = (totalSec: number): void => {
     setNum(nums.days, pad(Math.floor(totalSec / 86400)));
     setNum(nums.hours, pad(Math.floor((totalSec % 86400) / 3600)));
     setNum(nums.minutes, pad(Math.floor((totalSec % 3600) / 60)));
     setNum(nums.seconds, pad(totalSec % 60));
-    if (totalSec === 0) window.clearInterval(id);
-  }
+  };
 
-  tick();
-  const id = window.setInterval(tick, 1000);
+  // EVENT_DATE en el pasado: el tick inicial pegaba TDZ en `id` y tumba todo el boot.
+  const first = remaining();
+  paint(first);
+  if (first === 0) return el;
+
+  const id = window.setInterval(() => {
+    const totalSec = remaining();
+    paint(totalSec);
+    if (totalSec === 0) window.clearInterval(id);
+  }, 1000);
   return el;
 }
