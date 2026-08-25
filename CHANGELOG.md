@@ -35,6 +35,13 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
   para que los 4 midan lo mismo; 2 columnas en mobile.
 
 ### Fixed
+- Imágenes que respondían 200 pero no pintaban. Los archivos de `public/` tenían la
+  extensión mentida: `curva-equity.png`, `heatmap-mensual.png` y
+  `fusion-traders-logo.webp` eran JPEG. jsDelivr los servía con el content-type de
+  la extensión y `x-content-type-options: nosniff`, así que el navegador no podía
+  corregir el tipo y el decode fallaba. `curva-equity`, `heatmap-mensual` y
+  `alex-fernandez` pasan a R2 (donde el content-type coincide con los bytes) y el
+  logo, que no está en el bucket, se renombró a `.jpg`.
 - Sobrescrituras del tema de WordPress sobre los elementos de texto del embed.
   Nuevo `src/styles/reset.css` (importado antes de `typography.css`) que repone
   `inherit` en h1..h6/p/listas/a. El tema los estila con selectores de tipo, y un

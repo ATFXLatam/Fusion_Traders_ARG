@@ -12,10 +12,16 @@ export const ASSETS = {
   heroVideo: `${CDN}/stock-market-exchange-and-forex-candles-chart-back-2026-01-28-03-22-46-utc.mp4`,
   // Vacío = el hero usa el <video> bg (loop muted) en vez de la escena Spline.
   splineScene: '',
-  logo: `${ASSET_BASE}fusion-traders-logo.webp`,
-  heroMetrics: `${ASSET_BASE}curva-equity.png`,
-  heatmap: `${ASSET_BASE}heatmap-mensual.png`,
-  alexPhoto: `${ASSET_BASE}alex-fernandez.webp`,
+  // Imagenes en R2, como el video. Las copias de public/ tenian la extension
+  // mentida (JPEG llamado .png/.webp): jsDelivr las servia con el content-type de
+  // la extension y x-content-type-options: nosniff, asi que el navegador no podia
+  // corregirlo y el decode fallaba. La URL respondia 200 igual — accesible pero
+  // sin pintar. En R2 el content-type coincide con los bytes.
+  heroMetrics: `${CDN}/curva-equity.jpg`,
+  heatmap: `${CDN}/heatmap-mensual.jpg`,
+  alexPhoto: `${CDN}/alex-fernandez.webp`,
+  // El logo no esta en el bucket: sigue en el repo, ya con su extension real.
+  logo: `${ASSET_BASE}fusion-traders-logo.jpg`,
 };
 
 // Runtime de Spline vía CDN (no npm). Se inyecta solo si hay una <spline-viewer> montada.
