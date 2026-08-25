@@ -35,6 +35,10 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
   para que los 4 midan lo mismo; 2 columnas en mobile.
 
 ### Fixed
+- Imagen de métricas del hero invisible en Elementor: el reveal de `playIntro`
+  (`gsap.from` con `autoAlpha`) le escribía `opacity`/`transform` inline y el tween
+  se quedaba congelado en `opacity: 0.049`, con la imagen ya cargada y decodificada.
+  Pasa a ser un asset estático: se le quitó el `data-aa-fade`.
 - Imágenes que respondían 200 pero no pintaban. Los archivos de `public/` tenían la
   extensión mentida: `curva-equity.png`, `heatmap-mensual.png` y
   `fusion-traders-logo.webp` eran JPEG. jsDelivr los servía con el content-type de

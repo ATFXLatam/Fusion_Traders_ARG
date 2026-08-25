@@ -86,11 +86,13 @@ export function renderHero(root: Element): void {
   );
   left.appendChild(cta);
 
+  // Asset estatico, sin data-aa-fade a proposito: el reveal de playIntro le escribe
+  // opacity/transform inline y el tween se quedaba congelado en opacity 0.049, con la
+  // imagen cargada (naturalWidth 1024) pero invisible dentro de Elementor.
   const metrics = document.createElement('img');
   metrics.className = 'aa-hero__metrics';
   metrics.src = ASSETS.heroMetrics;
   metrics.alt = 'Métricas y curva de equity del Copytrade';
-  metrics.setAttribute('data-aa-fade', '');
 
   grid.append(left, metrics);
   hero.append(bg, grid);
