@@ -28,6 +28,7 @@
   padding: 0;
   display: inline-grid;
   position: relative;
+  border-radius: var(--aa-btn-radius);
   cursor: pointer;
   transition: scale 0.15s var(--aa-btn-ease-click);
 }
@@ -65,6 +66,25 @@
   z-index: 1;
   padding: var(--aa-btn-padding);
   grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+}
+/* Icono estático: el flip 3D es solo de los chars, moverlo también marearía. */
+.aa-landing .aa-button__icon {
+  display: flex;
+  flex: none;
+  width: 1.05em;
+  height: 1.05em;
+}
+.aa-landing .aa-button__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* Apila las dos copias del label (lo que antes hacía el __inner). */
+.aa-landing .aa-button__label {
   display: grid;
   justify-items: center;
 }
@@ -100,12 +120,35 @@
 }
 .aa-landing .aa-button__bg {
   background-color: var(--aa-btn-bg);
+  background-image: none;
   border-radius: var(--aa-btn-radius);
   grid-area: 1 / 1;
   width: 100%;
   height: 100%;
   padding: 0;
   transition: background-color var(--aa-duration-s) var(--aa-btn-ease-hover);
+}
+.aa-landing .aa-button--primary .aa-button__bg {
+  background-color: transparent;
+  background-image: var(--aa-btn-grad);
+}
+.aa-landing .aa-button--primary:not(.aa-button--sm) .aa-button__bg {
+  animation: aa-btn-glow 2.6s ease-in-out infinite;
+}
+@keyframes aa-btn-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 18px 2px rgba(var(--aa-gold-rgb), 0.45),
+      0 0 0 0 rgba(var(--aa-gold-rgb), 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 32px 8px rgba(var(--aa-gold-rgb), 0.7),
+      0 0 0 6px rgba(var(--aa-gold-rgb), 0.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aa-landing .aa-button--primary:not(.aa-button--sm) .aa-button__bg { animation: none; }
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -209,10 +252,13 @@
 }
 .aa-landing .aa-mod-card__h {
   margin: 0;
-  font-size: var(--aa-text-l);
-  font-weight: var(--aa-weight-bold);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-family: var(--aa-font-display);
+  font-size: var(--aa-text-m);
+  font-weight: 400;
+  line-height: var(--aa-leading-snug);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: inherit;
   text-wrap: balance;
 }
 .aa-landing .aa-mod-card__p {
@@ -223,6 +269,35 @@
   opacity: 0.82;
 }
 
+/* 1–2 cols: 130% of full/half width leaves giant empty cards. Height follows copy. */
+@media screen and (max-width: 991px) {
+  .aa-landing .aa-mod-card {
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+  }
+  .aa-landing .aa-mod-card__before { display: none; }
+  .aa-landing .aa-mod-card__content {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    padding: 2em 1.75em;
+  }
+  .aa-landing .aa-mod-card__center { gap: 0.85em; }
+  .aa-landing .aa-mod-card__tag { font-size: var(--aa-text-s); }
+  .aa-landing .aa-mod-card__h { font-size: var(--aa-text-l); }
+  .aa-landing .aa-mod-card__p {
+    font-size: var(--aa-text-m);
+    line-height: var(--aa-leading-normal);
+  }
+}
+
 @media screen and (max-width: 767px) {
-  .aa-landing .aa-mod-card__content { padding: 1.5em; }
+  .aa-landing .aa-mod-card {
+    --aa-size-font: 16px;
+    --aa-text-l: calc(var(--aa-size-font) * 1.75);
+    --aa-text-m: calc(var(--aa-size-font) * 1.25);
+    --aa-text-s: calc(var(--aa-size-font) * 1);
+  }
+  .aa-landing .aa-mod-card__content { padding: 1.75em 1.5em; }
 }

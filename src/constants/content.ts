@@ -41,16 +41,10 @@ export const LEARN_POINTS: string[] = [
 // 6 · Aliados / instructores (Blue Makers — datos reales del brief)
 export const SPEAKERS: SpeakerData[] = [
   {
-    name: 'Álvaro Matos',
-    role: 'CEO de Blue Makers',
-    company: 'Certificado Bloomberg',
-    bio: 'Trader e inversionista con experiencia en mercados financieros, criptomonedas y análisis macroeconómico. Lidera un fondo de inversión basado en trading cuantitativo algorítmico, una academia de formación y programas de mentoría presencial.',
-  },
-  {
-    name: 'Josué Flores',
-    role: 'Fundador y CEO de Blue Makers · Co-CEO de SkillyFund',
-    company: 'Certificado Bloomberg 2026',
-    bio: 'Trader profesional con 6 años de experiencia, especializado en índices americanos. Analista fundamental y macroeconómico, ponente en eventos a nivel LATAM, con operativa diaria y sesiones presenciales semanales.',
+    name: 'Alex Fernández',
+    role: 'Fundador de Fusion Traders',
+    company: 'Especialista en Price Action',
+    bio: 'Alex Fernández es el fundador de Fusion Traders, comunidad de educación financiera y trading. Especializado en análisis de acción del precio (price action) y desarrollo de estrategias basadas en la lectura del mercado, sin depender de indicadores tradicionales.',
   },
 ];
 

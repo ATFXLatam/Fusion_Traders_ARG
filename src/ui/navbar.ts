@@ -1,80 +1,41 @@
-// Navbar simple — conjunto de logos (ATFX · separador · Blue Makers) a la izquierda y un
-// CTA a la derecha, en space-between. Fijo bajo el topbar, fondo transparente. Los logos
-// cambian de versión según el tema de la sección detrás: white sobre dark, dark sobre
-// light (initNavbar detecta la sección bajo la barra y setea data-nav-theme).
-
 import { renderButton } from './atoms/button';
 import { NAV_CTA } from '../constants/nav';
-
-const LOGOS = 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev';
-
-function logo(name: string, darkSrc: string, whiteSrc: string, modifier: string): HTMLElement {
-  const wrap = document.createElement('span');
-  wrap.className = `aa-nav__logo ${modifier}`;
-
-  const dark = document.createElement('img');
-  dark.className = 'aa-nav__logo-img aa-nav__logo-img--dark';
-  dark.src = darkSrc;
-  dark.alt = name;
-
-  const white = document.createElement('img');
-  white.className = 'aa-nav__logo-img aa-nav__logo-img--white';
-  white.src = whiteSrc;
-  white.alt = '';
-  white.setAttribute('aria-hidden', 'true');
-
-  wrap.append(dark, white);
-  return wrap;
-}
+import { ASSETS } from '../constants/assets';
 
 export function renderNavbar(root: Element): void {
   const nav = document.createElement('nav');
   nav.className = 'aa-nav';
   nav.setAttribute('aria-label', 'Marca');
-  nav.setAttribute('data-nav-theme', 'dark'); // el hero arranca dark
+  nav.setAttribute('data-nav-theme', 'dark');
 
-  const logos = document.createElement('div');
-  logos.className = 'aa-nav__logos';
-
-  const sep = document.createElement('span');
-  sep.className = 'aa-nav__sep';
-  sep.setAttribute('aria-hidden', 'true');
-
-  logos.append(
-    logo('ATFX', `${LOGOS}/atfx-dark.png`, `${LOGOS}/atfx-white.png`, 'aa-nav__logo--atfx'),
-    sep,
-    logo('Blue Makers', `${LOGOS}/bluemakers-blue.png`, `${LOGOS}/bluemakers-white.png`, 'aa-nav__logo--bm'),
-  );
+  const brand = document.createElement('img');
+  brand.className = 'aa-nav__brand';
+  brand.src = ASSETS.logo;
+  brand.alt = 'Fusion Traders ARG';
 
   const cta = document.createElement('div');
   cta.className = 'aa-nav__cta';
-  cta.appendChild(renderButton({ href: NAV_CTA.href, label: NAV_CTA.label, variant: 'primary', size: 'sm' }));
+  cta.appendChild(
+    renderButton({ href: NAV_CTA.href, label: NAV_CTA.label, variant: 'primary', size: 'sm', target: '_blank' }),
+  );
 
-  nav.append(logos, cta);
+  nav.append(brand, cta);
   root.appendChild(nav);
 }
 
 export function initNavbar(root: Element): void {
   const nav = root.querySelector<HTMLElement>('.aa-nav');
   if (!nav) return;
-  const topbar = document.querySelector<HTMLElement>('[data-aa-topbar]');
 
   let raf = 0;
   let lastY = window.scrollY;
 
   const update = (): void => {
     raf = 0;
-
-    // Tema según la sección detrás. Probe bajo el topbar (referencia fija, no depende del
-    // transform del nav al ocultarse); los logos son pointer-events:none → el hit-test pasa.
-    const topbarBottom = topbar ? topbar.getBoundingClientRect().bottom : 0;
-    // Probe al centro: capta las cards centradas con tema propio (FAQ navy) además de
-    // los strips full-width. closest() sube hasta el ancestro con data-aa-section-theme.
-    const el = document.elementFromPoint(window.innerWidth / 2, topbarBottom + 18);
+    const el = document.elementFromPoint(window.innerWidth / 2, 18);
     const section = el?.closest<HTMLElement>('[data-aa-section-theme]');
     nav.setAttribute('data-nav-theme', section?.getAttribute('data-aa-section-theme') ?? 'light');
 
-    // Hide on scroll down (y no-top) · show en top y scroll up.
     const y = window.scrollY;
     if (y <= 4) nav.classList.remove('aa-nav--hidden');
     else if (y > lastY + 2 && y > 80) nav.classList.add('aa-nav--hidden');

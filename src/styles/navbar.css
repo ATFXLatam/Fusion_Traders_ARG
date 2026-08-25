@@ -29,14 +29,14 @@
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  padding: 0.5em 1em;
-  font-family: var(--aa-font-mono);
+  padding: 0;
+  font-family: inherit;
   font-size: var(--aa-text-xs);
   font-weight: var(--aa-weight-semibold);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--aa-bg);
-  background: var(--aa-fg);
+  color: var(--aa-blue-400);
+  background: transparent;
   border-radius: var(--aa-radius-pill);
 }
 
@@ -51,8 +51,8 @@
   color: var(--aa-accent-fg);
   border: 1px solid transparent;
   border-radius: var(--aa-radius-pill);
-  background: var(--aa-accent);
-  box-shadow: 0 8px 24px -6px rgba(23, 43, 79, 0.35);
+  background-image: var(--aa-btn-grad);
+  box-shadow: 0 8px 24px -6px rgba(10, 15, 28, 0.35);
   font-weight: var(--aa-weight-bold);
   font-size: var(--aa-text-xs);
   line-height: 1;
@@ -66,7 +66,7 @@
 }
 .aa-landing .aa-nav-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 32px -6px rgba(23, 43, 79, 0.45);
+  box-shadow: 0 12px 32px -6px rgba(10, 15, 28, 0.45);
 }
 .aa-landing .aa-nav-cta:hover .aa-roll__item { transform: translateY(-100%); }
 
@@ -114,6 +114,13 @@
   transform: translateY(calc(-100% - var(--aa-topbar-height)));
   opacity: 0;
 }
+.aa-landing .aa-nav__brand {
+  pointer-events: none;
+  display: block;
+  height: 3.25em;
+  width: auto;
+}
+
 .aa-landing .aa-nav__logos {
   display: flex;
   align-items: center;
@@ -142,7 +149,7 @@
   width: 1px;
   height: 1.9em;
   flex: none;
-  background: rgba(23, 43, 79, 0.25);
+  background: rgba(10, 15, 28, 0.25);
 }
 .aa-landing .aa-nav[data-nav-theme="dark"] .aa-nav__sep { background: rgba(255, 255, 255, 0.3); }
 
@@ -153,6 +160,7 @@
 
 @media screen and (max-width: 600px) {
   .aa-landing .aa-nav { padding-block: var(--aa-gap-xs); }
+  .aa-landing .aa-nav__brand { height: 2.6em; }
   .aa-landing .aa-nav__logos { gap: var(--aa-gap-s); }
   .aa-landing .aa-nav__logo--atfx .aa-nav__logo-img { height: 1em; }
   .aa-landing .aa-nav__logo--bm .aa-nav__logo-img { height: 1.7em; }

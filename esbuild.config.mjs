@@ -9,7 +9,9 @@ cpSync('src/fonts', 'dist/fonts', { recursive: true });
 const shared = {
   bundle: true,
   format: 'esm',
-  target: ['es2019'],
+  // es2020 (no es2019): import.meta.url resuelve las rutas de public/ contra el
+  // bundle emitido. En es2019 esbuild lo degrada a {} con un warning.
+  target: ['es2020'],
   logLevel: 'info',
 };
 

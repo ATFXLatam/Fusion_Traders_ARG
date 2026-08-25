@@ -1,19 +1,22 @@
-// Navegación — labels + anclas. Las secciones destino se irán creando por fase;
-// el indicador del navbar se activa solo cuando el ancla existe en el DOM.
-
 export interface NavLink {
   label: string;
   href: string;
 }
 
+export const TELEGRAM_URL = 'https://t.me/fusiontradersarg';
+
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Por qué asistir', href: '#beneficios' },
-  { label: 'Para quién', href: '#problema' },
-  { label: 'Speakers', href: '#speakers' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Alex', href: '#speakers' },
+  { label: 'El grupo', href: '#beneficios' },
+  { label: 'Resultados', href: '#resultados' },
 ];
 
 export const NAV_CTA = {
-  label: 'Reservar lugar',
-  href: '#registro',
+  label: 'Unirse gratis',
+  href: TELEGRAM_URL,
+};
+
+export const JOIN_CTA = {
+  label: 'Unirse al grupo gratis',
+  href: TELEGRAM_URL,
 };

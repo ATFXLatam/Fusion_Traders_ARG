@@ -19,6 +19,24 @@
 }
 .aa-landing .aa-section-header__sub { max-width: 40em; }
 
+.aa-landing .aa-resultados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--aa-gap-l);
+  text-align: center;
+}
+.aa-landing .aa-resultados__heatmap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border-radius: var(--aa-radius-l);
+  border: 1px solid rgba(var(--aa-gold-rgb), 0.32);
+  box-shadow: 0 0 50px rgba(var(--aa-gold-rgb), 0.2);
+}
+
 /* ─── 5 · Qué aprenderás (lista numerada con directional-hover) ─────────────────── */
 .aa-landing .aa-learn__inner {
   display: flex;
@@ -155,21 +173,31 @@
 .aa-landing .aa-faq .aa-container--card {
   --aa-bg:        var(--aa-navy-900);
   --aa-bg-subtle: var(--aa-navy-850);
-  --aa-fg:        #ffffff;
-  --aa-fg-muted:  rgba(255, 255, 255, 0.65);
-  --aa-fg-subtle: rgba(255, 255, 255, 0.35);
-  --aa-border:    rgba(255, 255, 255, 0.12);
-  background: var(--aa-navy-900);
+  --aa-fg:        var(--aa-blue-50);
+  --aa-fg-muted:  rgba(245, 243, 238, 0.72);
+  --aa-fg-subtle: rgba(245, 243, 238, 0.4);
+  --aa-border:    rgba(245, 243, 238, 0.12);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--aa-blue-990) 20%, var(--aa-blue-800) 130%);
   color: var(--aa-fg);
 }
+.aa-landing .aa-faq .aa-container--card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(var(--aa-gold-rgb), 0.25), transparent 60%);
+  pointer-events: none;
+}
 .aa-landing .aa-faq__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: var(--aa-gap-m);
 }
-/* Pills (badge + "Preguntas frecuentes") quedan compactos a la izquierda */
-.aa-landing .aa-faq__inner > .aa-pill { align-self: flex-start; }
 .aa-landing .aa-faq__intro { max-width: 52ch; }
 /* Mapa de la sede: ancho completo de la card, enmarcado y redondeado */
 .aa-landing .aa-faq__map {
@@ -189,6 +217,6 @@
 .aa-landing .aa-faq .aa-accordion { width: 100%; }
 .aa-landing .aa-faq__cta {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: var(--aa-gap-s);
 }

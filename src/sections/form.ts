@@ -48,6 +48,9 @@ export function renderFormSection(root: Element): void {
   mount.setAttribute('data-atfx-form-mount', 'lead');
   mount.setAttribute('data-lang', 'es');
   mount.setAttribute('data-theme', 'dark'); // atfx-forms aplica su tema dark
+  // Enruta todos los leads de esta LP al BDM Sergio Vargas (SF User Id, Staff Id 200891).
+  // El form lo manda como form_fields[OwnerId__c]; un flow server-side lo copia al OwnerId real.
+  mount.setAttribute('data-bdm-owner', '005T1000007Zhr8IAC');
 
   // Card: intro (con countdown) + form.
   const inner = document.createElement('div');

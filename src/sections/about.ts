@@ -1,59 +1,39 @@
-// 7 · Sobre el evento — efecto MWG 094 (drift gallery): sección pinneada con el texto
-// (label + heading + sub) centrado fijo, mientras una tira de fotos de la masterclass
-// deriva alrededor del centro al scrollear. Strip dark profundo. Init en drift-gallery.ts.
-
-import { renderHeading, renderParagraph } from '../ui/text';
-import { renderPill } from '../ui/atoms/pill';
-import { MASTERCLASS_PHOTOS } from '../constants/masterclass';
-
-// Subconjunto: ~12 fotos para que el recorrido pinneado no sea excesivo.
-const PHOTOS = MASTERCLASS_PHOTOS.slice(0, 12);
+import { renderContainer } from '../ui/layout';
+import { renderSectionHeader } from '../ui/section-header';
+import { renderParagraph } from '../ui/text';
+import { ASSETS } from '../constants/assets';
 
 export function renderAboutSection(root: Element): void {
   const section = document.createElement('section');
-  section.className = 'aa-drift';
-  section.id = 'evento';
-  section.setAttribute('data-aa-section-theme', 'light');
+  section.className = 'aa-section';
+  section.id = 'resultados';
+  section.setAttribute('data-aa-section-theme', 'dark');
   section.setAttribute('data-aa-nav-anchor', '');
 
-  const container = document.createElement('div');
-  container.className = 'aa-drift__container';
-
-  // Texto centrado (queda fijo en el centro mientras las fotos derivan alrededor)
-  const text = document.createElement('div');
-  text.className = 'aa-drift__text';
-
-  const pill = renderPill('Sobre el evento');
-
-  const heading = renderHeading({
-    size: 'l',
-    tag: 'h2',
-    text: 'Respaldado por ATFX y Blue Makers',
-    highlight: 'Blue Makers',
+  const header = renderSectionHeader({
+    eyebrow: 'Resultados',
+    heading: 'La disciplina de hoy es la libertad de mañana.',
   });
+
+  const heatmap = document.createElement('img');
+  heatmap.className = 'aa-resultados__heatmap';
+  heatmap.src = ASSETS.heatmap;
+  heatmap.alt = 'Heatmap mensual de resultados del Copytrade';
+  heatmap.loading = 'lazy';
+  heatmap.decoding = 'async';
+  heatmap.setAttribute('data-aa-fade', '');
 
   const sub = renderParagraph({
     size: 'l',
-    text: 'Una masterclass presencial en la Cámara de Comercio de Lima sobre el futuro de la inversión.',
-    className: 'aa-drift__sub',
+    text: 'Cada sesión y cada seguimiento del Copytrade forman parte de un mismo proceso: constancia, análisis y visión de largo plazo.',
+    className: 'aa-section-header__sub',
   });
+  sub.setAttribute('data-aa-fade', '');
 
-  text.append(pill, heading, sub);
+  const wrap = document.createElement('div');
+  wrap.className = 'aa-resultados';
+  wrap.append(header, heatmap, sub);
 
-  // Tira horizontal de fotos
-  const cards = document.createElement('div');
-  cards.className = 'aa-drift__cards';
-  PHOTOS.forEach((src, i) => {
-    const img = document.createElement('img');
-    img.className = 'aa-drift__card';
-    img.src = src;
-    img.alt = `Masterclass — foto ${i + 1}`;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    cards.appendChild(img);
-  });
-
-  container.append(text, cards);
-  section.appendChild(container);
+  section.appendChild(renderContainer({ size: 'default', children: [wrap] }));
   root.appendChild(section);
 }

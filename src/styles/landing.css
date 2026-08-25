@@ -3,7 +3,7 @@
 /* Toda la especificidad vive bajo .aa-landing para no colisionar con Elementor. */
 
 /* Inter Tight (body) desde Google Fonts — debe ir primero (regla @import). */
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Bebas+Neue&display=swap');
 @import "./fonts.css";
 @import "./tokens.css";
 @import "./typography.css";
@@ -21,7 +21,6 @@
 @import "./speakers.css";
 @import "./pillar-slider.css";
 @import "./slider.css";
-@import "./cursor.css";
 @import "./benefits.css";
 @import "./accordion.css";
 @import "./footer.css";
@@ -77,7 +76,11 @@
 .aa-landing .aa-text-accent  { color: var(--aa-accent); }
 /* Highlight de heading — color sólido de acento (sin gradiente) */
 .aa-landing .aa-text-gradient {
-  color: var(--aa-accent);
+  background-image: var(--aa-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 .aa-landing .aa-flex-col     { display: flex; flex-direction: column; }
 .aa-landing .aa-flex-center  { display: flex; align-items: center; justify-content: center; }

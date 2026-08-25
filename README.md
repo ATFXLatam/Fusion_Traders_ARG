@@ -1,8 +1,7 @@
-# Peru_atLP
+# Fusion_Traders_ARG
 
-Landing page versionada del evento **ATFX Perú** "El Futuro de la Inversión" (14 jul 2026,
-Cámara de Comercio de Lima). La lógica y los estilos se sirven vía **jsDelivr**; **Elementor
-solo aporta un punto de montaje**.
+Landing page versionada de **Fusion Traders ARG**. La lógica y los estilos se sirven vía
+**jsDelivr**; **Elementor solo aporta un punto de montaje**.
 
 Build: esbuild + TypeScript + GSAP. Design language basado en OSMO (tokens, easing,
 animaciones, tipografía, espaciado).
@@ -15,7 +14,7 @@ Pega esto en un widget **HTML** (no en el widget Form de Elementor):
 <div data-aa-mount data-aa-theme="light" data-aa-lang="es"></div>
 
 <script data-cfasync="false"
-  src="https://cdn.jsdelivr.net/gh/karenrebecag/Peru_atLP@latest/loader.js"></script>
+  src="https://cdn.jsdelivr.net/gh/ATFXLatam/Fusion_Traders_ARG@latest/loader.js"></script>
 ```
 
 Atributos del mount:

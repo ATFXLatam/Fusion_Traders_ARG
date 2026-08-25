@@ -3,7 +3,17 @@
 .aa-landing .aa-footer__inner {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--aa-gap-xl);
+  text-align: center;
+}
+.aa-landing .aa-footer__brand {
+  display: block;
+  width: 3.25em;
+  height: 3.25em;
+  aspect-ratio: 1;
+  object-fit: contain;
+  opacity: 0.45;
 }
 
 .aa-landing .aa-footer__top {
@@ -107,6 +117,7 @@
 
 /* Disclaimer legal */
 .aa-landing .aa-footer__legal {
+  width: 100%;
   padding-top: var(--aa-padding-m);
   border-top: 1px solid var(--aa-border);
 }

@@ -1,25 +1,20 @@
-// Hero (banner) — base del HeroStrip de SparkSummit: video bg + overlay detrás,
-// columna única de texto (heading + subtítulo + detalles del evento + CTA).
-// Tokens --aa-* (OSMO).
-
 import { renderHeading } from '../ui/text';
 import { renderButton } from '../ui/atoms/button';
 import { renderPill } from '../ui/atoms/pill';
 import { ASSETS } from '../constants/assets';
+import { JOIN_CTA } from '../constants/nav';
 
 export function renderHero(root: Element): void {
   const hero = document.createElement('section');
   hero.className = 'aa-hero';
   hero.id = 'top';
-  hero.setAttribute('data-aa-section-theme', 'dark'); // strip oscuro sobre el video
+  hero.setAttribute('data-aa-section-theme', 'dark');
   hero.setAttribute('data-aa-nav-anchor', '');
-  hero.setAttribute('data-aa-intro', ''); // sus hijos animan al montar (no al scroll)
-  // Parallax (Portfolio2026): la escena de fondo se mueve scrubbeada al scroll
+  hero.setAttribute('data-aa-intro', '');
   hero.setAttribute('data-parallax', 'trigger');
   hero.setAttribute('data-parallax-start', '10');
   hero.setAttribute('data-parallax-end', '-10');
 
-  // Fondo: escena Spline (si hay export .splinecode) o video de fallback, + overlay.
   const bg = document.createElement('div');
   bg.className = 'aa-hero__bg';
 
@@ -45,8 +40,6 @@ export function renderHero(root: Element): void {
     media = video;
   }
 
-  // Wrapper = target del parallax (GSAP mueve este; el scale/zoom va en el media interno
-  // para no pisar el transform del parallax).
   const mediaWrap = document.createElement('div');
   mediaWrap.className = 'aa-hero__media-wrap';
   mediaWrap.setAttribute('data-parallax', 'target');
@@ -59,12 +52,11 @@ export function renderHero(root: Element): void {
   const grid = document.createElement('div');
   grid.className = 'aa-hero__grid';
 
-  // ── Columna izquierda ──────────────────────────────────────────────────────
   const left = document.createElement('div');
   left.className = 'aa-hero__left';
   left.setAttribute('data-hero-left', '');
 
-  const tag = renderPill('Masterclass presencial');
+  const tag = renderPill('Alex · Fusion Traders ARG');
   tag.classList.add('aa-hero__tag');
   tag.setAttribute('data-aa-fade', '');
   left.appendChild(tag);
@@ -73,42 +65,34 @@ export function renderHero(root: Element): void {
     renderHeading({
       size: 'xxl',
       tag: 'h1',
-      text: 'El Futuro de la Inversión',
-      split: true,
+      text: 'Mirá los resultados de nuestro sistema de Copytrade',
       className: 'aa-hero__title',
     }),
   );
+  left.querySelector('.aa-hero__title')?.setAttribute('data-aa-fade', '');
 
   const sub = document.createElement('p');
   sub.className = 'aa-hero__sub';
   sub.setAttribute('data-aa-fade', '');
   sub.textContent =
-    'Inteligencia, datos y oportunidades en los mercados globales.';
+    'Sumate gratis a Fusion Traders ARG y seguí de cerca los resultados de nuestro Copytrade y las sesiones en vivo del equipo.';
   left.appendChild(sub);
-
-  // Detalles del evento (fecha/horario + modalidad/lugar)
-  const details = document.createElement('div');
-  details.className = 'aa-hero__details';
-  details.setAttribute('data-aa-fade', '');
-
-  const when = document.createElement('p');
-  when.className = 'aa-hero__detail aa-hero__detail--strong';
-  when.textContent = 'Martes 14 de julio · 9:00 a.m. – 12:00 p.m.';
-
-  const where = document.createElement('p');
-  where.className = 'aa-hero__detail';
-  where.textContent = 'Presencial · Cámara de Comercio de Lima';
-
-  details.append(when, where);
-  left.appendChild(details);
 
   const cta = document.createElement('div');
   cta.className = 'aa-hero__cta';
   cta.setAttribute('data-aa-fade', '');
-  cta.appendChild(renderButton({ href: '#registro', label: 'Regístrate', variant: 'primary' }));
+  cta.appendChild(
+    renderButton({ href: JOIN_CTA.href, label: JOIN_CTA.label, variant: 'primary', target: '_blank' }),
+  );
   left.appendChild(cta);
 
-  grid.appendChild(left);
+  const metrics = document.createElement('img');
+  metrics.className = 'aa-hero__metrics';
+  metrics.src = ASSETS.heroMetrics;
+  metrics.alt = 'Métricas y curva de equity del Copytrade';
+  metrics.setAttribute('data-aa-fade', '');
+
+  grid.append(left, metrics);
   hero.append(bg, grid);
   root.appendChild(hero);
 }
