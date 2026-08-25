@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Bebas+Neue&display=swap');
 @import "./fonts.css";
 @import "./tokens.css";
+@import "./reset.css";
 @import "./typography.css";
 @import "./layout.css";
 @import "./components.css";
@@ -28,19 +29,17 @@
 @import "./odometer.css";
 @import "./section-theme.css";
 
-/* Reset box-sizing: sin esto, width:100% + padding desbordan los contenedores y el
-   overflow-x: clip del root recorta el contenido por la derecha en todas las strips. */
-.aa-landing *,
-.aa-landing *::before,
-.aa-landing *::after {
-  box-sizing: border-box;
-}
-
 /* ─── Root wrapper ────────────────────────────────────────────────────────────── */
 .aa-landing {
   font-family: var(--aa-font);
   font-size: var(--aa-size-font);
   color: var(--aa-fg);
+  /* Ancla de la herencia: reset.css pone `inherit` en los elementos de texto, así que
+     si la raíz no declarara estas, `inherit` resolvería a los valores del tema host. */
+  font-weight: var(--aa-weight-regular);
+  font-style: normal;
+  line-height: var(--aa-leading-normal);
+  letter-spacing: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Contiene cualquier overflow horizontal (p. ej. del form embebido) sin crear
@@ -60,12 +59,6 @@
   z-index: -1;
   background: var(--aa-bg);
   pointer-events: none;
-}
-
-/* Reset de márgenes UA en texto: el ritmo vertical lo controlan los tokens (gap),
-   no los márgenes em-based del navegador (que en flex no colapsan y se acumulan). */
-.aa-landing :where(h1, h2, h3, h4, h5, h6, p) {
-  margin: 0;
 }
 
 /* Dark theme global + section themes (strips) viven en section-theme.css. */

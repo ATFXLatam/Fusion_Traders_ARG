@@ -1,0 +1,49 @@
+/* atfx-peru-lp · reset de host. Neutraliza lo que el tema de WordPress y Elementor
+   le aplican DIRECTAMENTE a los elementos de texto desnudos.
+
+   Por qué existe: el tema estila `h1..h6`, `p`, `a`, `li` con selectores de tipo
+   (especificidad 0,0,1). El landing pone color y tipografía en ancestros
+   (.aa-landing y [data-aa-section-theme]) y espera que bajen por herencia. Pero un
+   valor DIRECTO sobre el elemento siempre gana a uno HEREDADO, por muy específico
+   que sea el ancestro — la herencia no compite en la cascada, solo se aplica cuando
+   nada matchea. Por eso el color de la sección no llegaba a los headings: no era
+   falta de especificidad, era herencia contra regla directa.
+
+   Reponer `inherit` explícito vuelve a enganchar la cadena de herencia del landing.
+
+   ORDEN: este archivo va ANTES que typography.css y los componentes. Empata en
+   especificidad (0,2,0) con ellos, y en un empate gana la regla que aparece
+   después — que deben ser ellas, no este reset. */
+
+.aa-landing *,
+.aa-landing *::before,
+.aa-landing *::after {
+  box-sizing: border-box;
+}
+
+.aa-landing :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, blockquote, figure, figcaption, dl, dt, dd) {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+  text-align: inherit;
+}
+
+/* font-size fuera del bloque de arriba a propósito: el tema solo lo toca en `h3`
+   (0,0,1), que las clases .aa-h-* ya ganan. Resetearlo apagaría la escala de
+   cualquier heading que en el futuro se renderice sin su clase. */
+
+.aa-landing :is(ul, ol) {
+  list-style: none;
+}
+
+.aa-landing a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -35,6 +35,15 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
   para que los 4 midan lo mismo; 2 columnas en mobile.
 
 ### Fixed
+- Sobrescrituras del tema de WordPress sobre los elementos de texto del embed.
+  Nuevo `src/styles/reset.css` (importado antes de `typography.css`) que repone
+  `inherit` en h1..h6/p/listas/a. El tema los estila con selectores de tipo, y un
+  valor directo gana siempre a uno heredado: por eso el color de la sección no
+  llegaba a los headings. No era especificidad, era herencia contra regla directa.
+  El `:where(h1..p){margin:0}` (especificidad cero, perdía contra cualquier cosa)
+  y el reset de `box-sizing` se mudaron ahí.
+- La raíz `.aa-landing` declara `font-weight`, `font-style`, `line-height` y
+  `letter-spacing`: sin eso, el `inherit` del reset resolvía a los valores del host.
 - Imágenes de `public/` servidas desde el mismo tag de jsDelivr que el bundle
   (`new URL('../public/', import.meta.url)`). Antes eran rutas absolutas `/public/...`
   que resolvían contra el dominio del host de WordPress, no contra el CDN: 404 en
