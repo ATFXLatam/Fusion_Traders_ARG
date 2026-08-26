@@ -21,6 +21,16 @@ Atributos del mount:
 - `data-aa-theme` → `light` | `dark` (default `light`)
 - `data-aa-lang`  → `es` | `en` (default `es`)
 
+## Tracking
+
+El Meta Pixel `909413621420786` lo carga el bundle (`src/core/meta-pixel.ts`): `init` +
+`PageView` al montar. **WordPress no debe cargar otro pixel de Meta en esta página** — dos
+pixeles con el mismo ID duplican eventos. Si hay un plugin de Meta o un snippet en el
+header de Elementor, hay que desactivarlo para esta landing.
+
+El token de la Conversions API es server-side y **no va en el repo**: el bundle es público
+en jsDelivr.
+
 ## Distribución
 
 ```

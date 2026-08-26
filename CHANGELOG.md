@@ -17,6 +17,10 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
   Josué Flores (strip inferior, columna derecha), reemplazando los placeholders.
 - Foto real de Alex Fernández en la sección Speakers (`public/alex-fernandez.webp`),
   reemplazando el placeholder dashed.
+- Meta Pixel `909413621420786` en el bundle (`src/core/meta-pixel.ts`, inicializado en
+  `boot()`): `init` + `PageView`. Va en el embed y no en el header de WordPress para que
+  el ID viaje con el release. Requiere que WordPress no cargue otro pixel de Meta en esta
+  página: dos pixeles con el mismo ID duplican `PageView`.
 
 ### Changed
 - Video de fondo del hero al 60% de opacidad, para que el texto respire sobre el loop.
@@ -33,6 +37,8 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
 - Fotos de aliados en proporción 4:5 (ligeramente vertical).
 - Countdown: squares en grid de columnas iguales (`minmax(0,1fr)`) con `aspect-ratio` 1:1,
   para que los 4 midan lo mismo; 2 columnas en mobile.
+- `TELEGRAM_URL` pasa a `https://t.me/Copy_FusionTraders` (link correcto del briefing).
+  Alcanza a los tres CTA: navbar, hero y FAQ.
 
 ### Fixed
 - Imagen de métricas del hero invisible en Elementor: el reveal de `playIntro`

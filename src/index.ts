@@ -6,6 +6,7 @@ const _v = document.querySelector<HTMLScriptElement>('script[src*="Fusion_Trader
 console.log(`[fusion-traders-arg-lp] v${_v} loaded`);
 
 import { type Theme, type Lang } from './core/types';
+import { initMetaPixel } from './core/meta-pixel';
 import { initMotion } from './ui/motion';
 import { renderNavbar, initNavbar } from './ui/navbar';
 import { renderScrollProgress, initScrollProgress } from './ui/scroll-progress';
@@ -41,6 +42,8 @@ function resolveLang(raw: string | undefined): Lang {
 }
 
 function boot(): void {
+  initMetaPixel();
+
   const mounts = document.querySelectorAll<HTMLElement>('[data-aa-mount]');
   mounts.forEach((mount) => {
     const theme = resolveTheme(mount.dataset.aaTheme);
