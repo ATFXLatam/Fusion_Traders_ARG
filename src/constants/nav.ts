@@ -3,7 +3,7 @@ export interface NavLink {
   href: string;
 }
 
-export const TELEGRAM_URL = 'https://t.me/fusiontradersarg';
+export const TELEGRAM_URL = 'https://t.me/Copy_FusionTraders';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Alex', href: '#speakers' },
